@@ -34,9 +34,9 @@ func (p *Parser) ParseExpression(s string) (*Expr, error) {
 }
 
 type Expr struct {
-	Left  *Value    `@@`
-	Op    *Operator `@( "*" | "/" | "+" | "-" )`
-	Right *Value    `@@`
+	Left  *Value    `parse:"@@"`
+	Op    *Operator `parse:"@( \"*\" | \"/\" | \"+\" | \"-\" )"`
+	Right *Value    `parse:"@@"`
 }
 
 func (e *Expr) Evaluate() (interface{}, error) {
@@ -67,8 +67,8 @@ func (e *Expr) EvaluateFloat() float64 {
 }
 
 type Value struct {
-	Integer *int     `  @Int`
-	Float   *float64 `| @Float`
+	Integer *int     `parse:"  @Int"`
+	Float   *float64 `parse:"| @Float"`
 }
 
 func (v *Value) isInt() bool {
